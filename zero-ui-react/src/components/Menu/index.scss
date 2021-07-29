@@ -1,0 +1,80 @@
+@import "../../styles/variables";
+@import "../../styles/mixin";
+
+.zero-menu {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 30px;
+  list-style: none;
+  border-bottom: $menu-border-width solid $menu-border-color;
+  box-shadow: $menu-box-shadow;
+
+  .menu-item {
+    padding: $menu-item-padding-y $menu-item-padding-x;
+    cursor: pointer;
+    transition: $menu-transition;
+
+    &:hover, &:focus {
+      text-decoration: none;
+      color: $menu-item-active-color;
+    }
+
+    &.is-disabled {
+      color: $menu-item-disabled-color;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    &:after{
+      content: '';
+      width: 0;
+    }
+
+    &.is-active {
+      color: $menu-item-active-color;
+      position: relative;
+
+      &:after {
+        position: absolute;
+        content: '';
+        left: 50%;
+        transform: translate(-50%);
+        bottom: 0;
+        background: $menu-item-active-color;
+        width: 100%;
+        height: 2px;
+        transition: all .25s linear;
+      }
+    }
+  }
+}
+
+.menu-vertical {
+  flex-direction: column;
+  border-bottom: 0;
+  border-right: $menu-border-width solid $menu-border-color;
+
+  .menu-item {
+    &:hover {
+      color: $menu-item-active-color;
+    }
+
+    &.is-active {
+      color: $menu-item-active-color;
+      position: relative;
+
+      &:after {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: 0;
+        background: $menu-item-active-color;
+        width: 2px;
+        height: 100%;
+        transition: all .25s linear;
+      }
+    }
+  }
+}
+

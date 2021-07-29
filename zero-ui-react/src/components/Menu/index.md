@@ -9,13 +9,33 @@ path: /components/menu
 
 ```tsx
 import React, {useState} from 'react';
-import {Menu,MenuItem} from 'zero-ui-react';
+import {Menu, MenuItem} from 'zero-ui-react';
 
 export default () => {
 
   return (
     <>
-      <Menu onSelect={(index)=>alert(index)}>
+      <Menu>
+        <MenuItem index={0} key={1}> item1</MenuItem>
+        <MenuItem index={1} key={2}> item2</MenuItem>
+        <MenuItem index={2} key={3}> item3</MenuItem>
+      </Menu>
+    </>
+  )
+};
+```
+
+## 竖向排列
+
+```tsx
+import React, {useState} from 'react';
+import {Menu, MenuItem} from 'zero-ui-react';
+
+export default () => {
+
+  return (
+    <>
+      <Menu mode="vertical" >
         <MenuItem index={0} key={1}> item1</MenuItem>
         <MenuItem index={1} key={2}> item2</MenuItem>
         <MenuItem index={2} key={3}> item3</MenuItem>
