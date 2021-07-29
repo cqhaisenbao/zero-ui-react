@@ -8,7 +8,7 @@ hero:
 features:
   - icon: /images/react.png
     title: React 17
-    desc: 项目基于React17，采用函数组件编写
+    desc: 项目基于React17，采用函数组件编写，代码简洁易懂
   - icon: /images/typescript.png
     title: Typescript
     desc: 使用了Typescript，增强代码健壮性

@@ -1,13 +1,47 @@
 ---
-title: Switch 开关
-path: /components/switch
+title: Switch 开关 path: /components/switch
 ---
 
-默认Switch:
+# Switch
+
+## 基本用法
 
 ```tsx
-import React from 'react';
-import { Switch } from 'zero-ui-react';
+import React, {useState} from 'react';
+import {Switch} from 'zero-ui-react';
 
-export default () => <Switch />;
+export default () => {
+  const [checked, setChecked] = useState(false);
+
+  const checkedChange = (val: boolean) => {
+    console.log(val)
+  }
+
+  return (
+    <>
+      <Switch checked={checked} onChange={checkedChange}/>
+    </>
+  )
+};
 ```
+
+## 禁用状态
+
+```tsx
+import React, {useState} from 'react';
+import {Switch} from 'zero-ui-react';
+
+export default () => {
+  const [checked1] = useState(false);
+  const [checked2] = useState(true);
+
+  return (
+    <>
+      <Switch checked={checked1} disabled/>
+      <Switch checked={checked2} disabled/>
+    </>
+  )
+};
+```
+
+<API></API>
