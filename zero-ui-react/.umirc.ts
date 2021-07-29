@@ -31,6 +31,7 @@ export default defineConfig({
           // 菜单子项（可选）
           'components/Switch/index.md',
           'components/Button/index.md', // 对应的 Markdown 文件，路径是相对于 resolve.includes 目录识别的
+          'components/Menu/index.md',
         ],
       },
       {
