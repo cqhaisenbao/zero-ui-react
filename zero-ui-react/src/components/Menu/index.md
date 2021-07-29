@@ -15,10 +15,10 @@ export default () => {
 
   return (
     <>
-      <Menu>
-        <MenuItem key={1}> item1</MenuItem>
-        <MenuItem key={2}> item2</MenuItem>
-        <MenuItem key={3}> item3</MenuItem>
+      <Menu onSelect={(index)=>alert(index)}>
+        <MenuItem index={0} key={1}> item1</MenuItem>
+        <MenuItem index={1} key={2}> item2</MenuItem>
+        <MenuItem index={2} key={3}> item3</MenuItem>
       </Menu>
     </>
   )
