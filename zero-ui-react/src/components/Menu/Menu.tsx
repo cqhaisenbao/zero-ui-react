@@ -1,5 +1,6 @@
 import React, {createContext, useState} from 'react';
 import classNames from 'classnames';
+import {MenuItemProps} from './MenuItem';
 
 type SelectedCallback = (selectedIndex: number) => void
 
@@ -35,10 +36,25 @@ const Menu: React.FC<MenuProps> = (props) => {
     onSelect: handleClick
   };
 
+  const renderChidren = () => {
+    return React.Children.map(children, (child, index) => {
+      const childrenElement = child as React.FunctionComponentElement<MenuItemProps>;
+      const {displayName} = childrenElement.type;
+      if (displayName === 'MenuItem') {
+        //这样就可以不用给item传index了
+        return React.cloneElement(childrenElement, {
+          index,
+        });
+      } else {
+        console.error('Menu has a child which is not a MenuItem component');
+      }
+    });
+  };
+
   return (
     <ul className={classes} style={style}>
       <MenuContext.Provider value={passedContext}>
-        {children}
+        {renderChidren()}
       </MenuContext.Provider>
     </ul>
   );
