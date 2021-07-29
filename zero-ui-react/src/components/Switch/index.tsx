@@ -23,10 +23,11 @@ interface SwitchProps {
 }
 
 export const Switch: React.FC<SwitchProps> = (props) => {
-  const {checked, disabled, onChange} = props;
+  const {checked, disabled, onChange, size} = props;
   const [value, setValue] = useState(false);
 
   const classes = classNames({'zero-checked': value}, 'zero-switch');
+  const switchWrapperClasses = classNames({[`switch-${size}`]: size}, 'switchWrapper');
 
   useEffect(() => {
     setValue(checked);
@@ -35,7 +36,7 @@ export const Switch: React.FC<SwitchProps> = (props) => {
   myUseEffect(value, onChange);
 
   return (
-    <div className="switchWrapper">
+    <div className={switchWrapperClasses}>
       <button disabled={disabled} className={classes} onClick={() => setValue(!value)}>
         <span/>
       </button>
