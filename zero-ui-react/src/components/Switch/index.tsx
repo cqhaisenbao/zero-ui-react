@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames";
-import myUseEffect from '../hooks/myUseEffect';
+import myUseEffect from '../../hooks/myUseEffect';
 import './index.scss';
 
 interface SwitchProps {
