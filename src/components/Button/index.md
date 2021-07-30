@@ -68,9 +68,6 @@ import React from 'react';
 import {Button} from 'zero-ui-react';
 
 export default () => {
-  const fn = () => {
-    console.log(1);
-  };
 
   return (
     <>
