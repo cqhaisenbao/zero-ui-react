@@ -19,7 +19,7 @@ export default defineConfig({
     },
     {
       title: 'GitHub',
-      path: 'https://github.com/umijs/dumi',
+      path: 'https://github.com/cqhaisenbao/zero-ui-react',
     },
   ],
   menus: {
