@@ -15,7 +15,7 @@ export default () => {
   const [visible, setVisible] = useState(false);
 
   return (
-      <Icon icon="angle-up" theme="danger" size="10x" />
+      <Icon icon="angle-down" theme="primary" size="10x" />
   );
 };
 ```

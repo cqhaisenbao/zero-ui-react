@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+@import "../../styles/mixin";
+
+@each $key, $val in $theme-colors {
+  .icon-#{$key} {
+    color: $val;
+  }
+}
