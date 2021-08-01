@@ -3,7 +3,8 @@ import { defineConfig } from 'dumi';
 export default defineConfig({
   title: 'zero-ui-react',
   locales: [['zh-CN', '中文']],
-  favicon: 'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png',
+  favicon:
+    'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png',
   logo: 'https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png',
   outputPath: 'docs-dist',
   mode: 'site',
@@ -32,6 +33,7 @@ export default defineConfig({
           'components/Switch/index.md',
           'components/Button/index.md', // 对应的 Markdown 文件，路径是相对于 resolve.includes 目录识别的
           'components/Menu/index.md',
+          'components/Dialog/index.md',
         ],
       },
       {

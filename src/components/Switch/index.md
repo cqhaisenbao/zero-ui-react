@@ -1,5 +1,6 @@
 ---
-title: Switch 开关 path: /components/switch
+title: Switch 开关 
+path: /components/switch
 ---
 
 # Switch
