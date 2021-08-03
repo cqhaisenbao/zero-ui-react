@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, ReactElement } from 'react';
+import React, { ChangeEvent, InputHTMLAttributes, ReactElement } from 'react';
 import classNames from 'classnames';
 import Icon from '@/components/Icon';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
@@ -9,11 +9,11 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size
   icon?: IconProp
   prepand?: string | ReactElement
   append?: string | ReactElement
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-
 const Input: React.FC<InputProps> = (props) => {
-  const { disabled, size, icon, prepand, append } = props;
+  const { disabled, size, icon, prepand, append, ...restProps } = props;
   const classes = classNames('zero-input-wrapper', {
     [`input-size-${size}`]: size,
     'is-disabled': disabled,
@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = (props) => {
     <div className={classes}>
       {prepand && <div className='zero-input-group-prepend'>{prepand}</div>}
       {icon && <div className='icon-wrapper'><Icon icon={icon} title={`title-${icon}`} /></div>}
-      <input className='zero-input-inner' disabled={disabled} />
+      <input className='zero-input-inner' {...restProps} disabled={disabled} />
       {append && <div className='zero-input-group-append'>{append}</div>}
     </div>
   );
