@@ -35,6 +35,7 @@ export default defineConfig({
           'components/Menu/index.md',
           'components/Dialog/index.md',
           'components/Icon/index.md',
+          'components/Input/index.md',
         ],
       },
       {

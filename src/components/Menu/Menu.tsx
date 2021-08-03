@@ -36,7 +36,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     onSelect: handleClick
   };
 
-  const renderChidren = () => {
+  const renderChildren = () => {
     return React.Children.map(children, (child, index) => {
       const childrenElement = child as React.FunctionComponentElement<MenuItemProps>;
       const {displayName} = childrenElement.type;
@@ -54,7 +54,7 @@ const Menu: React.FC<MenuProps> = (props) => {
   return (
     <ul className={classes} style={style}>
       <MenuContext.Provider value={passedContext}>
-        {renderChidren()}
+        {renderChildren()}
       </MenuContext.Provider>
     </ul>
   );
