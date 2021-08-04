@@ -1,6 +1,5 @@
 ---
-title: AutoComplete 自动补全 
-path: /components/autocomplete
+title: AutoComplete 自动补全 path: /components/autocomplete
 ---
 
 # AutoComplete
@@ -9,20 +8,20 @@ path: /components/autocomplete
 
 ```tsx
 import React, { useState } from 'react';
-import { Input,AutoComplete } from 'zero-ui-react';
+import { Input, AutoComplete } from 'zero-ui-react';
 
 export default () => {
-  const citys=[{ value:'wuhan', label:'武汉' },
-    { value:'chongqing', label:'重庆' },
-    { value:'beijing', label:'北京' }
+  const citys = [{ value: 'wuhan', label: '武汉' },
+    { value: 'chongqing', label: '重庆' },
+    { value: 'beijing', label: '北京' }
   ]
-  const handleFetch=(query:string)=>{
-    return citys.filter(name=>name.value.includes(query))
+  const handleFetch = (query: string) => {
+    return citys.filter(name => name.value.includes(query))
   }
-  
+
   return (
     <div style={{ width: '300px' }}>
-      <AutoComplete fetchSuggestions={handleFetch} onSelect={(item)=>console.log(item)}/>
+      <AutoComplete fetchSuggestions={handleFetch} onSelect={(item) => console.log(item)} />
     </div>
   );
 };
@@ -32,24 +31,57 @@ export default () => {
 
 ```tsx
 import React, { useState } from 'react';
-import { Input,AutoComplete } from 'zero-ui-react';
+import { Input, AutoComplete } from 'zero-ui-react';
 
 export default () => {
-  const citys=['wuhan','xian','shanghai','beijing','shenzhen','chongqing']
-  const handleFetch=(query:string)=>{
-    return citys.filter(name=>name.includes(query)).map(name=>({value:name}))
+  const citys = ['wuhan', 'xian', 'shanghai', 'beijing', 'shenzhen', 'chongqing']
+  const handleFetch = (query: string) => {
+    return citys.filter(name => name.includes(query)).map(name => ({ value: name }))
   }
-  const renderOption=(item)=>{
-    return(
+  const renderOption = (item) => {
+    return (
       <>
         <h3>{item.value}</h3>
       </>
     )
   }
-  
+
   return (
     <div style={{ width: '300px' }}>
-      <AutoComplete fetchSuggestions={handleFetch} renderOption={renderOption} onSelect={(item)=>console.log(item)}/>
+      <AutoComplete fetchSuggestions={handleFetch} renderOption={renderOption} onSelect={(item) => console.log(item)} />
+    </div>
+  );
+};
+```
+
+## 异步搜索
+
+```tsx
+import React, { useState } from 'react';
+import { Input, AutoComplete } from 'zero-ui-react';
+
+export default () => {
+  const citys = ['wuhan', 'xian', 'shanghai', 'beijing', 'shenzhen', 'chongqing']
+  const handleFetch = async (query: string) => {
+    const data = await fetch(`https://api.github.com/search/users?q=${query}`)
+    return data.json().then(({ items }) => {
+      return items.slice(0, 10).map(item => ({
+        value: item.login,
+        ...item
+      }))
+    })
+  }
+  const renderOption = (item) => {
+    return (
+      <>
+        <h3>{item.value}</h3>
+      </>
+    )
+  }
+
+  return (
+    <div style={{ width: '300px' }}>
+      <AutoComplete fetchSuggestions={handleFetch} renderOption={renderOption} onSelect={(item) => console.log(item)} />
     </div>
   );
 };
