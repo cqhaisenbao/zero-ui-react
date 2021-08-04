@@ -84,7 +84,7 @@ export default () => {
   
   return (
     <div style={{ width: '300px' }}>
-      <AutoComplete fetchSuggestions={handleFetch} />
+      <AutoComplete fetchSuggestions={handleFetch} onSelect={(item)=>console.log(item)}/>
     </div>
   );
 };
