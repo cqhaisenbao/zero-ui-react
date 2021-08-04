@@ -82,7 +82,7 @@ export default () => {
 
   return (
     <div style={{ width: '300px' }}>
-      <AutoComplete fetchSuggestions={handleFetch} renderOption={renderOption} onSelect={(item) => console.log(item)} />
+      <AutoComplete fetchSuggestions={handleFetch} delay={500} renderOption={renderOption} onSelect={(item) => console.log(item)} />
     </div>
   );
 };
