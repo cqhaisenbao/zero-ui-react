@@ -5,6 +5,7 @@ export { default as MenuItem } from './components/Menu/MenuItem';
 export { default as Dialog } from './components/Dialog';
 export { default as Icon } from './components/Icon';
 export { default as Input } from './components/Input';
+export { default as AutoComplete } from './components/AutoComplete';
 
 import './styles/index.scss';
 import './index.scss';

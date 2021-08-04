@@ -22,6 +22,16 @@ const Input: React.FC<InputProps> = (props) => {
     'input-group-prepend': !!prepand,
   });
 
+  const fixControlledValue = (value: any) => {
+    if (typeof value === 'undefined' || value === null) {
+      return '';
+    }
+    return value
+  };
+  if ('value' in props) {
+    restProps.value = fixControlledValue(props.value);
+  }
+
   return (
     <div className={classes}>
       {prepand && <div className='zero-input-group-prepend'>{prepand}</div>}
