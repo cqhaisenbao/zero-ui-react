@@ -41,7 +41,7 @@ export default () => {
   const renderOption = (item) => {
     return (
       <>
-        <h3>{item.value}</h3>
+        <h5>{item.value}</h5>
       </>
     )
   }

@@ -1,0 +1,22 @@
+@import "../../styles/variables";
+@import "../../styles/mixin";
+
+.suggestionsWrapper{
+  list-style: none;
+  padding: 10px 0;
+  margin: 5px 0;
+  background-color: #fff;
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+  li{
+    list-style: none;
+    line-height: 36px;
+    padding: 0 20px;
+    margin: 0;
+    font-size: 14px;
+    color: #606266;
+    cursor: pointer;
+    outline: none;
+  }
+}

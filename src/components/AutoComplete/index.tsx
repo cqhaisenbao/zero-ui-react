@@ -1,6 +1,7 @@
 import React, { ChangeEvent, ReactElement, useState } from 'react';
 import Input, { InputProps } from '@/components/Input';
 import Icon from '@/components/Icon';
+import './index.scss'
 
 interface DataSourceObject {
   value: string
@@ -48,7 +49,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   };
   const generateDropdown = () => {
     return (
-      <ul>
+      <ul className="suggestionsWrapper">
         {suggestions.map((item, index) => {
           return (
             <li key={index} onClick={() => handleSelect(item)}>
