@@ -74,7 +74,8 @@ export default () => {
   const renderOption = (item) => {
     return (
       <>
-        <h3>{item.value}</h3>
+        <h2>Name:{item.login}</h2>
+        <p>url:{item.url}</p>
       </>
     )
   }
