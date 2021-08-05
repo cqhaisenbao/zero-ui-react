@@ -4,7 +4,7 @@ import Icon from '@/components/Icon';
 import './index.scss';
 import useDebounce from '@/hooks/useDebounce';
 import classNames from 'classnames';
-import useClickOutSside from '@/hooks/useClickOutSside';
+import useClickOutSide from '@/hooks/useClickOutSide';
 
 interface DataSourceObject {
   value: string
@@ -28,7 +28,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const triggerSearch = useRef(false);
   const componentRef = useRef<HTMLDivElement>(null);
   const debounceValue = useDebounce(inputValue, delay);
-  useClickOutSside(componentRef, () => {
+  useClickOutSide(componentRef, () => {
     setSuggestions([]);
   });
 
