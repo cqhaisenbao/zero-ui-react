@@ -1,6 +1,17 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import Button from '@/components/Button';
 import axios from 'axios';
+
+export interface UploadFile {
+  uid: string
+  size: number
+  name: string
+  status?: 'ready' | 'uploading' | 'success' | 'error'
+  percent?: number
+  raw?: File
+  response?: any
+  error?: any
+}
 
 export interface UploadProps {
   action: string
@@ -14,6 +25,19 @@ export interface UploadProps {
 export const Upload: React.FC<UploadProps> = (props) => {
   const { action, onError, onProgress, onChange, beforeUpload, onSuccess } = props;
   const fileInput = useRef<HTMLInputElement>(null);
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
+    setFileList(prevList => {
+      return prevList.map(file => {
+        if (file.uid === updateFile.uid) {
+          return { ...file, ...updateObj };
+        } else {
+          return file;
+        }
+      });
+    });
+  };
+
   const handleClick = () => {
     if (fileInput.current) {
       fileInput.current.click();
@@ -45,6 +69,15 @@ export const Upload: React.FC<UploadProps> = (props) => {
     });
   };
   const post = (file: File) => {
+    let _file: UploadFile = {
+      uid: Date.now() + 'upload-file',
+      status: 'ready',
+      name: file.name,
+      size: file.size,
+      percent: 0,
+      raw: file,
+    };
+    setFileList([_file, ...fileList]);
     const formData = new FormData();
     formData.append(file.name, file);
     axios.post(action, formData, {
@@ -54,19 +87,21 @@ export const Upload: React.FC<UploadProps> = (props) => {
       onUploadProgress: (e) => {
         let percentage = Math.round((e.loaded * 100) / e.total) || 0;
         if (percentage < 100) {
+          updateFileList(_file, { percent: percentage, status: 'uploading' });
           onProgress && onProgress(percentage, file);
         }
       },
     }).then(res => {
-      console.log(res);
+      updateFileList(_file, { status: 'success', response: res.data });
       onSuccess && onSuccess(res.data, file);
       onChange && onChange(file);
     }).catch(err => {
-      console.log(err);
+      updateFileList(_file, { status: 'error', error: err });
       onError && onError(err, file);
       onChange && onChange(file);
     });
   };
+  console.log(fileList)
   return (
     <div className='zero-upload-wrapper'>
       <Button onClick={handleClick} btnType='primary'>Upload File</Button>
