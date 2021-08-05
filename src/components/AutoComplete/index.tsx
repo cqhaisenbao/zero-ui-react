@@ -1,9 +1,10 @@
-import React, { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useRef, useState } from 'react';
 import Input, { InputProps } from '@/components/Input';
 import Icon from '@/components/Icon';
 import './index.scss';
 import useDebounce from '@/hooks/useDebounce';
 import classNames from 'classnames';
+import useClickOutSside from '@/hooks/useClickOutSside';
 
 interface DataSourceObject {
   value: string
@@ -24,10 +25,15 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   const [inputValue, setInputValue] = useState(value as string);
   const [loading, setLoading] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
+  const triggerSearch = useRef(false);
+  const componentRef = useRef<HTMLDivElement>(null);
   const debounceValue = useDebounce(inputValue, delay);
+  useClickOutSside(componentRef, () => {
+    setSuggestions([]);
+  });
 
   useEffect(() => {
-    if (debounceValue) {
+    if (debounceValue && triggerSearch.current) {
       const results = fetchSuggestions(debounceValue);
       if (results instanceof Promise) {
         setLoading(true);
@@ -46,12 +52,14 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
+    triggerSearch.current = true;
     setInputValue(value);
   };
   const handleSelect = (item: DataSourceType) => {
     setInputValue(item.value);
     setSuggestions([]);
     onSelect && onSelect(item);
+    triggerSearch.current = false;
   };
   const renderTemplate = (item: DataSourceType) => {
     return renderOption ? renderOption(item) : item.value;
@@ -101,7 +109,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   };
 
   return (
-    <div className='zero-auto-complete'>
+    <div className='zero-auto-complete' ref={componentRef}>
       <Input value={inputValue} onKeyDown={handleKeyDown} onChange={handleChange} {...restProps} />
       {loading && <ul><Icon icon='spinner' spin /></ul>}
       {(suggestions.length > 0) && generateDropdown()}
