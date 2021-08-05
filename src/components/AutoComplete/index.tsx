@@ -1,8 +1,9 @@
-import React, { ChangeEvent, ReactElement, useEffect, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useState } from 'react';
 import Input, { InputProps } from '@/components/Input';
 import Icon from '@/components/Icon';
 import './index.scss';
 import useDebounce from '@/hooks/useDebounce';
+import classNames from 'classnames';
 
 interface DataSourceObject {
   value: string
@@ -18,10 +19,11 @@ export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
 }
 
 export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
-  const { fetchSuggestions, value, onSelect, renderOption,delay, ...restProps } = props;
+  const { fetchSuggestions, value, onSelect, renderOption, delay, ...restProps } = props;
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const [inputValue, setInputValue] = useState(value as string);
   const [loading, setLoading] = useState(false);
+  const [highlightIndex, setHighlightIndex] = useState(-1);
   const debounceValue = useDebounce(inputValue, delay);
 
   useEffect(() => {
@@ -39,6 +41,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     } else {
       setSuggestions([]);
     }
+    setHighlightIndex(-1);
   }, [debounceValue]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,8 +60,11 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     return (
       <ul className='suggestionsWrapper'>
         {suggestions.map((item, index) => {
+          const cnames = classNames('suggestion-item', {
+            'item-highlighted': index === highlightIndex,
+          });
           return (
-            <li key={index} onClick={() => handleSelect(item)}>
+            <li key={index} className={cnames} onClick={() => handleSelect(item)}>
               {renderTemplate(item)}
             </li>
           );
@@ -66,10 +72,37 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
       </ul>
     );
   };
+  const highlight = (index: number) => {
+    if (index < 0) index = 0;
+    if (index >= suggestions.length) {
+      index = suggestions.length - 1;
+    }
+    setHighlightIndex(index);
+  };
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    switch (e.keyCode) {
+      case 13:
+        if (suggestions[highlightIndex]) {
+          handleSelect(suggestions[highlightIndex]);
+        }
+        break;
+      case 38:
+        highlight(highlightIndex - 1);
+        break;
+      case 40:
+        highlight(highlightIndex + 1);
+        break;
+      case 27:
+        setSuggestions([]);
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className='zero-auto-complete'>
-      <Input value={inputValue} onChange={handleChange} {...restProps} />
+      <Input value={inputValue} onKeyDown={handleKeyDown} onChange={handleChange} {...restProps} />
       {loading && <ul><Icon icon='spinner' spin /></ul>}
       {(suggestions.length > 0) && generateDropdown()}
     </div>

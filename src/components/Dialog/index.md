@@ -17,7 +17,7 @@ export default () => {
 
   return (
     <>
-      <Button onClick={() => setVisible(!visible)}>toggle Dialog</Button>
+      <Button onClick={() => setVisible(true)}>toggle Dialog</Button>
       <Dialog title="dialog title" visible={visible} okText="知道了">
         <p>Some contents...</p>
         <p>Some contents...</p>

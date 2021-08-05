@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import Button from '@/components/Button';
 
@@ -51,7 +51,15 @@ const Dialog: React.FC<DialogProps> = (props) => {
     children,
   } = props;
 
-  const onClickOverlay = () => {};
+  const [myVisible, setMyVisible] = useState(visible);
+
+  useEffect(() => {
+    setMyVisible(visible);
+    return ()=>{
+      console.log('des',visible);
+    }
+  }, [visible]);
+  const onClickOverlay = () => {setMyVisible(false)};
 
   const Title = () => {
     return <header>{title}</header>;
@@ -61,7 +69,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     return (
       <footer>
         <Button>{cancelText ? cancelText : '取消'}</Button>
-        <Button btnType="primary">{okText ? okText : '确认'}</Button>
+        <Button btnType='primary'>{okText ? okText : '确认'}</Button>
       </footer>
     );
   };
@@ -69,9 +77,9 @@ const Dialog: React.FC<DialogProps> = (props) => {
   const Dialog = () => {
     return (
       <div>
-        <div className="zero-dialog-overlay" onClick={onClickOverlay} />
-        <div className="zero-dialog-wrapper">
-          <div className="zero-dialog">
+        <div className='zero-dialog-overlay' onClick={onClickOverlay} />
+        <div className='zero-dialog-wrapper'>
+          <div className='zero-dialog'>
             {Title()}
             <main>{children}</main>
             {Footer()}
@@ -80,7 +88,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
       </div>
     );
   };
-  return <>{visible ? Dialog() : ''}</>;
+  return <>{myVisible ? Dialog() : ''}</>;
 };
 
 Dialog.defaultProps = {
