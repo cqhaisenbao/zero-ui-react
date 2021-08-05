@@ -37,6 +37,7 @@ export default defineConfig({
           'components/Icon/index.md',
           'components/Input/index.md',
           'components/AutoComplete/index.md',
+          'components/Upload/index.md',
         ],
       },
       {
