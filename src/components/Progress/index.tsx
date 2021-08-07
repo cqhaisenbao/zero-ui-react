@@ -1,5 +1,4 @@
-import React from 'react';
-import { ThemeProps } from '@/components/Icon';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 
 export interface ProgressProps {
@@ -7,16 +6,22 @@ export interface ProgressProps {
   strokeHeight?: number
   showText?: boolean
   styles?: React.CSSProperties
-  theme?: ThemeProps
+  theme?:  'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'
 }
 
 const Progress: React.FC<ProgressProps> = (props) => {
   const { percent, strokeHeight, styles, showText, theme } = props;
+  const [myPercent, setMyPercent] = useState(percent);
+  useEffect(() => {
+    if (percent > 100) return;
+    setMyPercent(percent);
+  }, [percent]);
+
   return (
     <div className='zero-progress-bar' style={styles}>
       <div className='zero-progress-bar-outer' style={{ height: `${strokeHeight}px` }}>
-        <div className={`zero-progress-bar-inner color-${theme}`} style={{ width: `${percent}%` }}>
-          {showText && <span className='inner-text'>{`${percent}%`}</span>}
+        <div className={`zero-progress-bar-inner color-${theme}`} style={{ width: `${myPercent}%` }}>
+          {showText && <span className='inner-text'>{`${myPercent}%`}</span>}
         </div>
       </div>
     </div>

@@ -7,14 +7,16 @@ title: Progress 进度条 path: /components/progress
 ## 默认用法
 
 ```tsx
-import React, { useState } from 'react';
-import { Progress } from 'zero-ui-react';
+import React, { useEffect, useState } from 'react';
+import { Progress, Button } from 'zero-ui-react';
 
 export default () => {
+  const [percent, setPetcent] = useState(10)
 
   return (
     <div>
-      <Progress percent={30} />
+      <Button onClick={() => {setPetcent(percent + 10)}}>+ 10%</Button>
+      <Progress percent={percent} />
     </div>
   );
 };
