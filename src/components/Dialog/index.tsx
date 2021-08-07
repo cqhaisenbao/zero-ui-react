@@ -54,9 +54,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
 
   useEffect(() => {
     setMyVisible(visible);
-    return ()=>{
-      console.log('des',visible);
-    }
   }, [visible]);
   const onClickOverlay = () => {setMyVisible(false)};
 
