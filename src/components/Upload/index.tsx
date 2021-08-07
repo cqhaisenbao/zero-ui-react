@@ -28,6 +28,8 @@ export interface UploadProps {
   name?: string
   data?: { [key: string]: any }
   withCredentials?: boolean
+  accept?: string
+  multiple?: boolean
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
@@ -44,6 +46,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
     headers,
     data,
     withCredentials,
+    accept,
+    multiple,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -104,7 +108,9 @@ export const Upload: React.FC<UploadProps> = (props) => {
       percent: 0,
       raw: file,
     };
-    setFileList([_file, ...fileList]);
+    setFileList(prevList => {
+      return [_file, ...prevList];
+    });
     const formData = new FormData();
     formData.append(name || 'file', file);
     if (data) {
@@ -139,7 +145,7 @@ export const Upload: React.FC<UploadProps> = (props) => {
   return (
     <div className='zero-upload-wrapper'>
       <Button onClick={handleClick} btnType='primary'>Upload File</Button>
-      <input onChange={handleFileChange} ref={fileInput} className='zero-file-input' style={{ display: 'none' }} type='file' />
+      <input onChange={handleFileChange} accept={accept} multiple={multiple} ref={fileInput} className='zero-file-input' style={{ display: 'none' }} type='file' />
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
