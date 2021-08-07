@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.scss';
 import { UploadFile } from '@/components/Upload/index';
 import Icon from '@/components/Icon';
 import Progress from '@/components/Progress';

@@ -1,7 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent, ReactElement, useEffect, useRef, useState } from 'react';
 import Input, { InputProps } from '@/components/Input';
 import Icon from '@/components/Icon';
-import './index.scss';
 import useDebounce from '@/hooks/useDebounce';
 import classNames from 'classnames';
 import useClickOutSide from '@/hooks/useClickOutSide';

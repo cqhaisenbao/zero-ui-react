@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './index.scss';
 import Button from '@/components/Button';
 
 interface DialogProps {
