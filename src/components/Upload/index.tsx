@@ -16,19 +16,61 @@ export interface UploadFile {
 }
 
 export interface UploadProps {
+  /**
+   * @description       文件上传地址
+   */
   action: string
+  /**
+   * @description       默认文件列表
+   */
   defaultFileList?: UploadFile[]
+  /**
+   * @description       文件上传前的回调
+   */
   beforeUpload?: (file: File) => boolean | Promise<File>
+  /**
+   * @description       上传进度变化的回调
+   */
   onProgress?: (percentage: number, file: File) => void
+  /**
+   * @description       文件上传成功的回调
+   */
   onSuccess?: (data: any, file: File) => void
+  /**
+   * @description       文件上传失败的回调
+   */
   onError?: (arr: any, file: File) => void
+  /**
+   * @description       文件改变的回调
+   */
   onChange?: (file: File) => void
+  /**
+   * @description       移除文件的回调
+   */
   onRemove?: (file: UploadFile) => void
+  /**
+   * @description       自定义headers
+   */
   headers?: { [key: string]: any }
+  /**
+   * @description       自定义发到后台的文件名参数
+   */
   name?: string
+  /**
+   * @description       上传所需的额为参数
+   */
   data?: { [key: string]: any }
+  /**
+   * @description       上传是否携带cookie
+   */
   withCredentials?: boolean
+  /**
+   * @description       限制允许文件类型
+   */
   accept?: string
+  /**
+   * @description       支持多文件上传
+   */
   multiple?: boolean
 }
 

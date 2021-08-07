@@ -119,6 +119,7 @@ export default () => {
               name={'fileName'}
               data={{ 'key': 'value' }}
               headers={{ 'X-Powerd-By': 'zero' }}
+              multiple
       />
     </div>
   );
