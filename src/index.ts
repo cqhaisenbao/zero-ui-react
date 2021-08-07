@@ -7,6 +7,7 @@ export { default as Icon } from './components/Icon';
 export { default as Input } from './components/Input';
 export { default as AutoComplete } from './components/AutoComplete';
 export { default as Upload } from './components/Upload';
+export { default as Progress } from './components/Progress';
 
 import './styles/index.scss';
 import './index.scss';
