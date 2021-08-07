@@ -1,5 +1,6 @@
 ---
-title: Upload 上传 path: /components/upload
+title: Upload 上传 
+path: /components/upload
 ---
 
 # Upload
@@ -98,6 +99,26 @@ export default () => {
     <div>
       <Upload action='https://www.fastmock.site/mock/091f0dd8445dd1bc86c0498bad219fa5/api/upload'
               defaultFileList={defaultFileList}
+      />
+    </div>
+  );
+};
+```
+
+## 自定义请求参数
+
+```tsx
+import React, { useState } from 'react';
+import { Upload } from 'zero-ui-react';
+
+export default () => {
+
+  return (
+    <div>
+      <Upload action='https://www.fastmock.site/mock/091f0dd8445dd1bc86c0498bad219fa5/api/upload'
+              name={'fileName'}
+              data={{ 'key': 'value' }}
+              headers={{ 'X-Powerd-By': 'zero' }}
       />
     </div>
   );

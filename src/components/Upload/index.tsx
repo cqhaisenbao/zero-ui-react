@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import Button from '@/components/Button';
 import axios from 'axios';
 import UploadList from '@/components/Upload/UploadList';
-import './index.scss'
+import './index.scss';
 
 export interface UploadFile {
   uid: string
@@ -24,10 +24,27 @@ export interface UploadProps {
   onError?: (arr: any, file: File) => void
   onChange?: (file: File) => void
   onRemove?: (file: UploadFile) => void
+  headers?: { [key: string]: any }
+  name?: string
+  data?: { [key: string]: any }
+  withCredentials?: boolean
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
-  const { action, onError, onProgress, onChange, beforeUpload, onSuccess, defaultFileList, onRemove } = props;
+  const {
+    action,
+    onError,
+    onProgress,
+    onChange,
+    beforeUpload,
+    onSuccess,
+    defaultFileList,
+    onRemove,
+    name,
+    headers,
+    data,
+    withCredentials,
+  } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
   const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
@@ -89,11 +106,18 @@ export const Upload: React.FC<UploadProps> = (props) => {
     };
     setFileList([_file, ...fileList]);
     const formData = new FormData();
-    formData.append(file.name, file);
+    formData.append(name || 'file', file);
+    if (data) {
+      Object.keys(data).forEach(key => {
+        formData.append(key, data[key]);
+      });
+    }
     axios.post(action, formData, {
       headers: {
+        ...headers,
         'Content-Type': 'multipart/form-data',
       },
+      withCredentials,
       onUploadProgress: (e) => {
         let percentage = Math.round((e.loaded * 100) / e.total) || 0;
         if (percentage < 100) {
@@ -119,6 +143,10 @@ export const Upload: React.FC<UploadProps> = (props) => {
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
+};
+
+Upload.defaultProps = {
+  name: 'file',
 };
 
 export default Upload;
