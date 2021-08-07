@@ -1,6 +1,8 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import Button from '@/components/Button';
 import axios from 'axios';
+import UploadList from '@/components/Upload/UploadList';
+import './index.scss'
 
 export interface UploadFile {
   uid: string
@@ -15,17 +17,19 @@ export interface UploadFile {
 
 export interface UploadProps {
   action: string
+  defaultFileList?: UploadFile[]
   beforeUpload?: (file: File) => boolean | Promise<File>
   onProgress?: (percentage: number, file: File) => void
   onSuccess?: (data: any, file: File) => void
   onError?: (arr: any, file: File) => void
   onChange?: (file: File) => void
+  onRemove?: (file: UploadFile) => void
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
-  const { action, onError, onProgress, onChange, beforeUpload, onSuccess } = props;
+  const { action, onError, onProgress, onChange, beforeUpload, onSuccess, defaultFileList, onRemove } = props;
   const fileInput = useRef<HTMLInputElement>(null);
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
   const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
     setFileList(prevList => {
       return prevList.map(file => {
@@ -68,6 +72,12 @@ export const Upload: React.FC<UploadProps> = (props) => {
       }
     });
   };
+  const handleRemove = (file: UploadFile) => {
+    setFileList((prevList) => {
+      return prevList.filter(item => item.uid !== file.uid);
+    });
+    onRemove && onRemove(file);
+  };
   const post = (file: File) => {
     let _file: UploadFile = {
       uid: Date.now() + 'upload-file',
@@ -101,11 +111,12 @@ export const Upload: React.FC<UploadProps> = (props) => {
       onChange && onChange(file);
     });
   };
-  console.log(fileList)
+  console.log(fileList);
   return (
     <div className='zero-upload-wrapper'>
       <Button onClick={handleClick} btnType='primary'>Upload File</Button>
       <input onChange={handleFileChange} ref={fileInput} className='zero-file-input' style={{ display: 'none' }} type='file' />
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
 };
