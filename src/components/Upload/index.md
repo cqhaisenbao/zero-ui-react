@@ -126,4 +126,24 @@ export default () => {
 };
 ```
 
+## 拖拽上传
+
+```tsx
+import React, { useState } from 'react';
+import { Upload,Icon } from 'zero-ui-react';
+
+export default () => {
+
+  return (
+    <div>
+      <Upload action='https://www.fastmock.site/mock/091f0dd8445dd1bc86c0498bad219fa5/api/upload' drag>
+        <Icon icon='upload' size='5x' theme='secondary'/>
+        <br/>
+        <p>拖拽上传</p>
+      </Upload>
+    </div>
+  );
+};
+```
+
 <API></API>

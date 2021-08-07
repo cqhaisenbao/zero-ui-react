@@ -2,7 +2,7 @@ import React, { ChangeEvent, useRef, useState } from 'react';
 import Button from '@/components/Button';
 import axios from 'axios';
 import UploadList from '@/components/Upload/UploadList';
-import './index.scss';
+import Dragger from '@/components/Upload/Dragger';
 
 export interface UploadFile {
   uid: string
@@ -72,6 +72,14 @@ export interface UploadProps {
    * @description       支持多文件上传
    */
   multiple?: boolean
+  /**
+   * @description       自定义上传触发元素
+   */
+  children?: React.ReactNode
+  /**
+   * @description       是否支持拖拽上传
+   */
+  drag?: boolean
 }
 
 export const Upload: React.FC<UploadProps> = (props) => {
@@ -90,6 +98,8 @@ export const Upload: React.FC<UploadProps> = (props) => {
     withCredentials,
     accept,
     multiple,
+    children,
+    drag,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -183,11 +193,13 @@ export const Upload: React.FC<UploadProps> = (props) => {
       onChange && onChange(file);
     });
   };
-  console.log(fileList);
+  const Children = children ? children : <Button onClick={handleClick} btnType='primary'>Upload File</Button>;
   return (
     <div className='zero-upload-wrapper'>
-      <Button onClick={handleClick} btnType='primary'>Upload File</Button>
-      <input onChange={handleFileChange} accept={accept} multiple={multiple} ref={fileInput} className='zero-file-input' style={{ display: 'none' }} type='file' />
+      <div className='zero-upload-input' style={{ display: 'inline-block' }} onClick={handleClick}>
+        {drag ? <Dragger onFIle={(files) => {uploadFiles(files);}}>{children}</Dragger> : Children}
+        <input onChange={handleFileChange} accept={accept} multiple={multiple} ref={fileInput} className='zero-file-input' style={{ display: 'none' }} type='file' />
+      </div>
       <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
