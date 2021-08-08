@@ -12,7 +12,7 @@ export default defineConfig({
   navs: [
     {
       title: '快速上手',
-      path: '/doc',
+      path: '/docs',
     },
     {
       title: '组件',
@@ -45,6 +45,16 @@ export default defineConfig({
       {
         title: '表单组件',
         children: [],
+      },
+    ],
+    '/docs': [
+      {
+        title: '快速上手',
+        children: [
+          // 菜单子项（可选）
+          '/docs/intro.md',
+          '/docs/start.md',
+        ],
       },
     ],
   },
