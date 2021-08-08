@@ -12,9 +12,21 @@ interface DataSourceObject {
 export type DataSourceType<T = {}> = T & DataSourceObject
 
 export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
+  /**
+   * @description       筛选条件
+   */
   fetchSuggestions: (str: string) => DataSourceType[] | Promise<DataSourceType[]>
+  /**
+   * @description       选择后的回调
+   */
   onSelect?: (item: DataSourceType) => void
+  /**
+   * @description       自定义options
+   */
   renderOption?: (item: DataSourceType) => ReactElement
+  /**
+   * @description       防抖延时
+   */
   delay?: number
 }
 
@@ -110,7 +122,7 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
   return (
     <div className='zero-auto-complete' ref={componentRef}>
       <Input value={inputValue} onKeyDown={handleKeyDown} onChange={handleChange} {...restProps} />
-      {loading && <ul><Icon icon='spinner' spin /></ul>}
+      {loading && <ul><Icon style={{ marginTop: 20 }} icon='spinner' spin /></ul>}
       {(suggestions.length > 0) && generateDropdown()}
     </div>
   );
