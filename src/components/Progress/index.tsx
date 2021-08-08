@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
 export interface ProgressProps {
+  /**
+   * @description       当前进度
+   */
   percent: number
+  /**
+   * @description       容器高度
+   */
   strokeHeight?: number
+  /**
+   * @description       容器内是否展示进度
+   */
   showText?: boolean
+  /**
+   * @description       自定义style
+   */
   styles?: React.CSSProperties
+  /**
+   * @description       主题
+   */
   theme?:  'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark'
 }
 
