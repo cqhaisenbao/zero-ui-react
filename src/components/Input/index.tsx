@@ -4,11 +4,29 @@ import Icon from '@/components/Icon';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
+  /**
+   * @description       是否禁用
+   */
   disabled?: boolean
+  /**
+   * @description       输入框大小
+   */
   size?: 'lg' | 'sm'
+  /**
+   * @description       icon名称
+   */
   icon?: IconProp
+  /**
+   * @description       带前缀
+   */
   prepand?: string | ReactElement
+  /**
+   * @description       带后缀
+   */
   append?: string | ReactElement
+  /**
+   * @description       输入框change回调
+   */
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 

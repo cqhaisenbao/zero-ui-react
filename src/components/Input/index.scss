@@ -6,6 +6,10 @@
   width: 100%;
   position: relative;
 
+  & + & {
+    margin-top: 10px;
+  }
+
   .icon-wrapper {
     position: absolute;
     height: 100%;
