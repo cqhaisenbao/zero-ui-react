@@ -16,7 +16,7 @@ export default () => {
   return (
     <div>
       <Button onClick={() => {setPetcent(percent + 10)}}>+ 10%</Button>
-      <Progress percent={percent} />
+      <Progress percent={percent} theme='danger'/>
     </div>
   );
 };

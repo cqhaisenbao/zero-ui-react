@@ -39,6 +39,7 @@ export default defineConfig({
           'components/AutoComplete/index.md',
           'components/Upload/index.md',
           'components/Progress/index.md',
+          'components/Transition/index.md',
         ],
       },
       {
