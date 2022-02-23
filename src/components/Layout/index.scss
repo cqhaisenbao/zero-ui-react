@@ -1,0 +1,23 @@
+.zero-layout {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+
+  &.hasAside {
+    flex-direction: row;
+    .zero-layout{
+      flex-direction: column;
+    }
+  }
+
+  &-content {
+    flex: 1;
+    border: 1px solid blue;
+  }
+
+  & & {
+    border: 1px solid green;
+    flex: 1;
+    flex-direction: row;
+  }
+}
