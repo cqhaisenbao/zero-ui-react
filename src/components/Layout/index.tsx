@@ -8,7 +8,16 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = (props) => {
   const { className, children, ...rest } = props;
-  const classes = classNames('zero-layout', className);
+
+  const hasAside = React.Children.toArray(children).find((child) => {
+    const childrenElement = child as React.FunctionComponentElement<{}>;
+    const { displayName } = childrenElement.type;
+    return displayName === 'Aside';
+  });
+
+  const classes = classNames('zero-layout', className, {
+    hasAside,
+  });
   return (
     <div className={classes} {...rest}>
       {children}

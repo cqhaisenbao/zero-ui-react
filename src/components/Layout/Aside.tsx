@@ -13,4 +13,6 @@ const Aside: React.FC<AsideProps> = (props) => {
   );
 };
 
+Aside.displayName = 'Aside';
+
 export default Aside;
