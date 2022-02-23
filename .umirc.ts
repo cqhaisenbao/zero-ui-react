@@ -40,6 +40,7 @@ export default defineConfig({
           'components/Upload/index.md',
           'components/Progress/index.md',
           'components/Transition/index.md',
+          'components/Layout/index.md',
         ],
       },
       {
