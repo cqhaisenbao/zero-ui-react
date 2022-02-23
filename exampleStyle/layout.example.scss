@@ -1,0 +1,20 @@
+@import "./src/styles/variables.scss";
+
+.x {
+  background: lighten($blue, 10%);
+  height: 40px;
+  margin: 4px 0;
+  color: white;
+}
+
+.y {
+  background: darken($blue, 10%);
+  margin: 4px 0;
+  color: white;
+}
+
+.z {
+  background: $orange;
+  margin: 4px 4px 4px 0;
+  color: white;
+}

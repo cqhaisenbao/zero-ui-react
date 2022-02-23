@@ -9,18 +9,19 @@ path: /components/layout
 
 ```tsx
 import React, { useState } from 'react';
+import '/exampleStyle/layout.example.scss';
 import { Layout, Header, Footer, Content } from 'zero-ui-react';
 
 export default () => {
   return (
-    <Layout className={'xxx'} style={{ height: '500px' }}>
-      <Header>
+    <Layout style={{ height: '500px' }}>
+      <Header className={'x'}>
         <div>Header</div>
       </Header>
-      <Content>
+      <Content className={'y'}>
         <div>Content</div>
       </Content>
-      <Footer>
+      <Footer className={'x'}>
         <div>Footer</div>
       </Footer>
     </Layout>
@@ -37,18 +38,18 @@ import { Layout, Header, Footer, Content, Aside } from 'zero-ui-react';
 export default () => {
   return (
     <Layout className={'xxx'} style={{ height: '500px' }}>
-      <Header>
+      <Header className="x">
         <div>Header</div>
       </Header>
       <Layout>
-        <Aside>
+        <Aside className="z">
           <div>Aside</div>
         </Aside>
-        <Content>
+        <Content className="y">
           <div>Content</div>
         </Content>
       </Layout>
-      <Footer>
+      <Footer className="x">
         <div>Footer</div>
       </Footer>
     </Layout>
@@ -65,17 +66,17 @@ import { Layout, Header, Footer, Content, Aside } from 'zero-ui-react';
 export default () => {
   return (
     <Layout style={{ height: '500px' }}>
-      <Aside>
+      <Aside className="z">
         <div>Aside</div>
       </Aside>
       <Layout>
-        <Header>
+        <Header className="x">
           <div>Header</div>
         </Header>
-        <Content>
+        <Content className="y">
           <div>Content</div>
         </Content>
-        <Footer>
+        <Footer className="x">
           <div>Footer</div>
         </Footer>
       </Layout>
