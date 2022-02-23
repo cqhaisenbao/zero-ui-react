@@ -9,12 +9,22 @@ path: /components/layout
 
 ```tsx
 import React, { useState } from 'react';
-import { Icon } from 'zero-ui-react';
+import { Layout, Header, Footer, Content } from 'zero-ui-react';
 
 export default () => {
-  const [visible, setVisible] = useState(false);
-
-  return <Icon icon="angle-down" theme="primary" size="10x" />;
+  return (
+    <Layout className={'xxx'} style={{ height: '500px' }}>
+      <Header>
+        <div>Header</div>
+      </Header>
+      <Content>
+        <div>Content</div>
+      </Content>
+      <Footer>
+        <div>Footer</div>
+      </Footer>
+    </Layout>
+  );
 };
 ```
 
