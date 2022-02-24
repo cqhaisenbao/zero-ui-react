@@ -32,10 +32,10 @@ describe('Button component test suite', () => {
   it('should render a link when buttonType is link and href is provided', () => {
     const { getByText } = render(
       <Button btnType="link" href="https://www.google.com">
-        Click Me
+        Click Me Link
       </Button>,
     );
-    const buttonElement = getByText('Click Me');
+    const buttonElement = getByText('Click Me Link');
     expect(buttonElement).toBeInTheDocument();
     expect(buttonElement).toHaveClass('btn btn-link');
     expect(buttonElement.getAttribute('href')).toEqual(
@@ -44,8 +44,10 @@ describe('Button component test suite', () => {
     expect(buttonElement.tagName).toEqual('A');
   });
   it('should render disabled button when disabled is true', () => {
-    const { getByText } = render(<Button {...disabledProps}>Click Me</Button>);
-    const buttonElement = getByText('Click Me') as HTMLButtonElement;
+    const { getByText } = render(
+      <Button {...disabledProps}>Click Me disabled</Button>,
+    );
+    const buttonElement = getByText('Click Me disabled') as HTMLButtonElement;
     expect(buttonElement).toBeInTheDocument();
     expect(buttonElement.disabled).toBeTruthy();
     fireEvent.click(buttonElement);
