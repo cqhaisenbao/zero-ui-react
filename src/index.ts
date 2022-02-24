@@ -14,6 +14,8 @@ export { default as Header } from './components/Layout/Header';
 export { default as Content } from './components/Layout/Content';
 export { default as Footer } from './components/Layout/Footer';
 export { default as Aside } from './components/Layout/Aside';
+export { default as Collapse } from './components/Collapse';
+export { default as CollapseItem } from './components/Collapse/CollapseItem';
 
 import './styles/index.scss';
 import './index.scss';

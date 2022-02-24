@@ -41,6 +41,7 @@ export default defineConfig({
           'components/Progress/index.md',
           'components/Transition/index.md',
           'components/Layout/index.md',
+          'components/Collapse/index.md',
         ],
       },
       {
