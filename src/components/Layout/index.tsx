@@ -19,7 +19,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
     hasAside,
   });
   return (
-    <div className={classes} {...rest}>
+    <div className={classes} {...rest} data-testid={'layout'}>
       {children}
     </div>
   );
