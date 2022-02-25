@@ -9,7 +9,7 @@ path: /components/layout
 
 ```tsx
 import React, { useState } from 'react';
-import '/exampleStyle/layout.example.scss';
+import './layout.example.scss';
 import { Layout, Header, Footer, Content } from 'zero-ui-react';
 
 export default () => {
