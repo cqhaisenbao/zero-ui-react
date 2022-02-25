@@ -15,5 +15,3 @@ RUN yarn docs:build
 FROM nginx
 WORKDIR /usr/share/nginx/html/
 COPY --from=builder /src/docs-dist .
-WORKDIR /etc/nginx/
-COPY --from=builder /src/default.conf .
