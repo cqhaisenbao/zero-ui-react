@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from 'react';
 
-const myUseEffect = (val: any, cb: Function) => {
+const myUseEffect = (val: any, cb?: Function) => {
   const [nUpdataecount, setNUpdateCount] = useState(0);
   useEffect(() => {
     setNUpdateCount(nUpdataecount + 1);
