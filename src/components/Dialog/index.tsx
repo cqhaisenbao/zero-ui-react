@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@/components/Button';
+import classNames from 'classnames';
 
 interface DialogProps {
   /**
@@ -55,17 +56,37 @@ const Dialog: React.FC<DialogProps> = (props) => {
   useEffect(() => {
     setMyVisible(visible);
   }, [visible]);
-  const onClickOverlay = () => {setMyVisible(false)};
+
+  const onClickOverlay = () => {
+    if (closeOnClickOverlay) {
+      setMyVisible(false);
+    }
+  };
+
+  const [hoverClose, setHoverClose] = useState(false);
+  const closeIconClasses = classNames('zero-dialog-close', {
+    'zero-dialog-close-hover': hoverClose,
+  });
 
   const Title = () => {
-    return <header>{title}</header>;
+    return (
+      <header>
+        {title}
+        <div
+          onMouseEnter={() => setHoverClose(true)}
+          onMouseLeave={() => setHoverClose(false)}
+          onClick={() => setMyVisible(false)}
+          className={closeIconClasses}
+        />
+      </header>
+    );
   };
 
   const Footer = () => {
     return (
       <footer>
         <Button>{cancelText ? cancelText : '取消'}</Button>
-        <Button btnType='primary'>{okText ? okText : '确认'}</Button>
+        <Button btnType="primary">{okText ? okText : '确认'}</Button>
       </footer>
     );
   };
@@ -73,9 +94,9 @@ const Dialog: React.FC<DialogProps> = (props) => {
   const Dialog = () => {
     return (
       <div>
-        <div className='zero-dialog-overlay' onClick={onClickOverlay} />
-        <div className='zero-dialog-wrapper'>
-          <div className='zero-dialog'>
+        <div className="zero-dialog-overlay" onClick={onClickOverlay} />
+        <div className="zero-dialog-wrapper">
+          <div className="zero-dialog">
             {Title()}
             <main>{children}</main>
             {Footer()}
